@@ -1,0 +1,473 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
+<meta name="theme-color" content="#6d28d9">
+<title>Migration Mission - Class 5 EVS</title>
+<style>
+*{box-sizing:border-box}
+body{margin:0;font-family:Arial,"Noto Sans",sans-serif;background:#f5f3ff;color:#202033}
+button{font:inherit}
+.app{max-width:900px;margin:auto;padding:12px}
+header{background:linear-gradient(135deg,#6d28d9,#0f766e);color:white;border-radius:22px;padding:20px;box-shadow:0 8px 25px #0002}
+h1{margin:0 0 6px;font-size:28px}.sub{opacity:.95}
+.teacher{margin-top:14px;background:#ffffff18;padding:10px;border-radius:14px;font-size:13px;line-height:1.5}
+.progressBox{background:white;margin:12px 0;padding:12px;border-radius:18px;box-shadow:0 4px 15px #0001}
+.progressTop{display:flex;justify-content:space-between;font-weight:700}.bar{height:12px;background:#e9e5f7;border-radius:20px;overflow:hidden;margin-top:8px}.fill{height:100%;width:0;background:linear-gradient(90deg,#7c3aed,#14b8a6);transition:.4s}
+.card{background:white;border-radius:20px;padding:18px;margin:12px 0;box-shadow:0 5px 18px #0001}
+h2{margin-top:0;color:#5b21b6}h3{color:#0f766e}
+.center{text-align:center}
+.btnrow{display:flex;flex-wrap:wrap;gap:10px;margin-top:15px}
+button{border:0;border-radius:14px;padding:12px 16px;cursor:pointer;font-weight:700}
+.primary{background:#6d28d9;color:white}.secondary{background:#0f766e;color:white}.light{background:#eeeafe;color:#4c1d95}
+.speak{background:#fff7ed;color:#9a3412;border:1px solid #fed7aa}
+.next{background:#16a34a;color:white;width:100%;font-size:17px}
+.hidden{display:none!important}
+.badge{display:inline-block;background:#ede9fe;color:#5b21b6;border-radius:999px;padding:6px 10px;font-size:12px;font-weight:800}
+.te{display:block;margin-top:7px;color:#0f766e}
+.lesson{line-height:1.55}.lesson li{margin:8px 0}
+.choice{display:block;width:100%;text-align:left;background:#f8fafc;border:2px solid #e2e8f0;margin:9px 0;padding:14px;border-radius:14px}
+.choice:active{transform:scale(.99)}.correct{border-color:#16a34a!important;background:#f0fdf4!important}.wrong{border-color:#dc2626!important;background:#fef2f2!important}
+.feedback{padding:12px;border-radius:14px;margin-top:12px;display:none}.feedback.show{display:block}.good{background:#dcfce7;color:#166534}.bad{background:#fee2e2;color:#991b1b}
+.story{display:flex;gap:12px;padding:14px;border:1px solid #e5e7eb;border-radius:16px;margin:10px 0}.avatar{font-size:36px}
+.missions{display:grid;grid-template-columns:repeat(5,1fr);gap:8px}.mission{padding:12px 7px;text-align:center;background:#f8fafc;border-radius:14px;font-size:12px;font-weight:700}.mission.done{background:#dcfce7;color:#166534}
+.question{font-size:20px;font-weight:800;line-height:1.45;margin:16px 0}
+.result{background:linear-gradient(135deg,#fff7ed,#ecfdf5);text-align:center}
+.big{font-size:42px;font-weight:900;color:#6d28d9}
+.small{font-size:12px;color:#6b7280}
+@media(max-width:650px){.missions{grid-template-columns:repeat(2,1fr)}h1{font-size:23px}.app{padding:8px}}
+
+.bottomNav{position:fixed;left:0;right:0;bottom:0;z-index:1000;background:#ffffffee;backdrop-filter:blur(8px);border-top:1px solid #ddd6fe;padding:9px max(10px,calc((100vw - 900px)/2));display:flex;gap:8px;align-items:center;box-shadow:0 -5px 18px #0002}
+.navBtn{flex:1;border-radius:13px;padding:11px 8px;font-size:14px}.back{background:#eeeafe;color:#4c1d95}.nextNav{background:#16a34a;color:white}.navLabel{min-width:82px;text-align:center;font-size:12px;font-weight:800;color:#5b21b6}
+body{padding-bottom:76px}
+.trophyBox{margin:16px auto;padding:18px;border-radius:22px;background:linear-gradient(135deg,#fff7ed,#fef3c7);border:3px solid #f59e0b;max-width:520px}
+.trophy{font-size:90px;line-height:1;filter:drop-shadow(0 5px 5px #0002);animation:trophyPop .8s ease-out}
+.levelTitle{font-size:24px;font-weight:900;color:#92400e}.levelText{font-size:14px;color:#78350f}
+@keyframes trophyPop{0%{transform:scale(.2) rotate(-15deg);opacity:0}70%{transform:scale(1.15) rotate(5deg);opacity:1}100%{transform:scale(1) rotate(0)}}
+
+.studentForm{background:#f8f7ff;border:2px solid #ddd6fe;border-radius:18px;padding:15px;margin:15px 0;text-align:left}
+.studentForm h3{margin-top:0}.studentForm label{display:block;font-weight:700;margin:10px 0 5px}
+.studentForm input,.studentForm select{width:100%;padding:12px;border:2px solid #ddd6fe;border-radius:12px;background:white;font-size:16px;outline:none}
+.studentForm input:focus,.studentForm select:focus{border-color:#7c3aed}
+</style>
+</head>
+<body>
+<div class="app">
+<header>
+<h1>🧭 Migration Mission</h1>
+<div class="sub">Class 5 EVS • Migration of People<br>5వ తరగతి EVS • ప్రజల వలస</div>
+<div class="teacher">
+<b>Teacher:</b> T N Sivaji • SGT<br>
+<b>School:</b> M P P School M Singupuram<br>
+<b>District:</b> Parvathipuram Manyam • <b>Subject:</b> EVS
+</div>
+</header>
+
+<div class="progressBox">
+<div class="progressTop"><span>Mission Progress / మిషన్ పురోగతి</span><span id="count">0 / 5</span></div>
+<div class="bar"><div id="fill" class="fill"></div></div>
+<div class="missions" style="margin-top:10px">
+<div id="m1" class="mission">1. Learn<br>📚</div>
+<div id="m2" class="mission">2. Types<br>🔀</div>
+<div id="m3" class="mission">3. Reasons<br>🧩</div>
+<div id="m4" class="mission">4. Stories<br>👦</div>
+<div id="m5" class="mission">5. Quiz<br>🏆</div>
+</div>
+</div>
+
+<section id="home" class="screen">
+<div class="card center">
+
+<h2>Welcome! / స్వాగతం!</h2>
+<div class="studentForm">
+  <h3>👤 Student Details / విద్యార్థి వివరాలు</h3>
+  <label>Student Name / విద్యార్థి పేరు</label>
+  <input id="studentName" type="text" placeholder="Enter your name / మీ పేరు నమోదు చేయండి" autocomplete="name">
+  <label>Class / తరగతి</label>
+  <select id="studentClass">
+    <option value="">Select Class / తరగతి ఎంచుకోండి</option>
+    <option>3rd Class</option><option>4th Class</option><option selected>5th Class</option>
+    <option>6th Class</option><option>7th Class</option>
+  </select>
+  <label>Section / సెక్షన్ <span class="small">(Optional)</span></label>
+  <input id="studentSection" type="text" placeholder="e.g. A / ఉదా: A">
+  <div id="studentError" class="feedback bad"></div>
+</div>
+
+<p>Learn about migration through short activities, stories and a final quiz.</p>
+<p class="te">చిన్న చిన్న activities, కథలు, చివరి క్విజ్ ద్వారా వలస గురించి నేర్చుకోండి.</p>
+<div class="btnrow">
+<button class="primary" onclick="startGame()">🚀 Start Mission / ప్రారంభించండి</button>
+<button class="speak" onclick="voice('Welcome to Migration Mission. Let us learn about migration. స్వాగతం. వలస గురించి నేర్చుకుందాం.')">🔊 Test Voice / వాయిస్ పరీక్ష</button>
+</div>
+<p class="small">If voice is silent, use Chrome and turn up media volume. Telugu voice quality depends on Telugu voices installed on the phone.</p>
+</div>
+</section>
+
+<section id="learn" class="screen hidden">
+<div class="card lesson">
+<h2>📚 Mission 1: Learn / దశ 1: నేర్చుకోండి</h2>
+<button class="speak" onclick="voice('Migration is the movement of people from one place to another in search of a better livelihood. Migration has two types: temporary and permanent. వలస అంటే మెరుగైన జీవనోపాధి కోసం ప్రజలు ఒక ప్రదేశం నుండి మరొక ప్రదేశానికి వెళ్లడం.')">🔊 Listen / వినండి</button>
+<h3>What is Migration? / వలస అంటే ఏమిటి?</h3>
+<p><b>Migration</b> is the movement of people from one place to another in search of a better livelihood.</p>
+<p class="te">మెరుగైన జీవనోపాధి కోసం ప్రజలు ఒక ప్రదేశం నుండి మరొక ప్రదేశానికి వెళ్లడాన్ని <b>వలస</b> అంటారు.</p>
+<h3>Two Types / రెండు రకాలు</h3>
+<ul>
+<li><b>Temporary migration:</b> People move for a short time and return home.<span class="te">తాత్కాలిక వలస: కొంతకాలం వెళ్లి తిరిగి ఇంటికి వస్తారు.</span></li>
+<li><b>Permanent migration:</b> People leave their home to live in a new place permanently.<span class="te">శాశ్వత వలస: కొత్త ప్రదేశంలో శాశ్వతంగా నివసించడానికి వెళ్తారు.</span></li>
+</ul>
+<h3>Reasons / కారణాలు</h3>
+<ul>
+<li>Natural reasons: floods, cyclones, drought.<span class="te">సహజ కారణాలు: వరదలు, తుఫానులు, కరువు.</span></li>
+<li>Other reasons: work, salary, business, education, family, safety and facilities.<span class="te">ఇతర కారణాలు: పని, జీతం, వ్యాపారం, విద్య, కుటుంబం, భద్రత, సౌకర్యాలు.</span></li>
+</ul>
+<div class="feedback show good">🎯 Learning target: Define migration, identify types and classify reasons.<br><span class="te">లక్ష్యం: వలసను నిర్వచించడం, రకాలను గుర్తించడం, కారణాలను వర్గీకరించడం.</span></div>
+<button class="next" onclick="completeLearn()">✅ Complete Mission 1 & Continue / దశ 1 పూర్తి చేసి కొనసాగించండి</button>
+</div>
+</section>
+
+<section id="types" class="screen hidden">
+<div class="card">
+<h2>🔀 Mission 2: Type Sort / దశ 2: వలస రకాలు</h2>
+<p>Read the situation and choose <b>Temporary</b> or <b>Permanent</b>.</p>
+<p class="te">సందర్భాన్ని చదివి తాత్కాలికమా లేదా శాశ్వతమా ఎంచుకోండి.</p>
+<div id="typeQuestion"></div><div id="typeOptions"></div><div id="typeFeedback" class="feedback"></div>
+<button id="typeNext" class="next hidden" onclick="openReasons()">➡️ Next Mission: Reasons / తదుపరి: కారణాలు</button>
+</div>
+</section>
+
+<section id="reasons" class="screen hidden">
+<div class="card">
+<h2>🧩 Mission 3: Reason Detective / దశ 3: కారణాలు</h2>
+<p>Is this a <b>Natural reason</b> or an <b>Other reason</b>?</p>
+<p class="te">ఇది సహజ కారణమా లేదా ఇతర కారణమా?</p>
+<div id="reasonQuestion"></div><div id="reasonOptions"></div><div id="reasonFeedback" class="feedback"></div>
+<button id="reasonNext" class="next hidden" onclick="openStories()">➡️ Next Mission: Stories / తదుపరి: కథలు</button>
+</div>
+</section>
+
+<section id="stories" class="screen hidden">
+<div class="card">
+<h2>👦 Mission 4: Story Detective / దశ 4: కథలు</h2>
+<p>Read each child's story and tap the button that identifies the main reason.</p>
+<p class="te">ప్రతి పిల్లవాడి కథను చదివి ప్రధాన కారణాన్ని గుర్తించే button నొక్కండి.</p>
+<div id="storiesBox"></div><div id="storyFeedback" class="feedback"></div>
+<button id="storyNext" class="next hidden" onclick="openQuiz()">➡️ Next Mission: Final Quiz / తదుపరి: తుది క్విజ్</button>
+</div>
+</section>
+
+<section id="quiz" class="screen hidden">
+<div class="card">
+<h2>🏆 Mission 5: Final Quiz / దశ 5: తుది క్విజ్</h2>
+<div id="quizBox"></div><div id="quizFeedback" class="feedback"></div>
+<button id="quizNext" class="next hidden" onclick="showResult()">🏆 See Final Result / తుది ఫలితం</button>
+</div>
+</section>
+
+<section id="result" class="screen hidden">
+<div class="card result">
+<h2>🎉 Mission Complete!</h2>
+<p><b id="resultStudentName">Student</b> • <span id="resultStudentClass">Class 5</span><span id="resultStudentSection"></span></p>
+<p class="te">మిషన్ పూర్తయింది!</p>
+<div class="trophyBox" id="trophyBox">
+<div class="trophy" id="trophyIcon">🏆</div>
+<div class="levelTitle" id="levelTitle">Top Level!</div>
+<div class="levelText" id="levelText">Excellent performance!</div>
+</div>
+<div class="big" id="finalScore">0</div><p>Points / పాయింట్లు</p>
+<p>⭐ Stars: <b id="finalStars">0</b></p>
+<p>Quiz: <b id="finalCorrect">0/5</b></p>
+<button class="primary" onclick="restart()">🔄 Play Again / మళ్లీ ఆడండి</button>
+<button class="speak" onclick="voice('Congratulations! Migration Mission is complete. Very good! అభినందనలు! మిషన్ పూర్తయింది. చాలా బాగా చేశారు!')">🔊 Congratulations / అభినందనలు</button>
+</div>
+</section>
+</div>
+
+<div id="bottomNav" class="bottomNav hidden">
+  <button id="backBtn" class="navBtn back" onclick="goBack()">⬅️ Back / వెనుకకు</button>
+  <div id="navLabel" class="navLabel">Mission</div>
+  <button id="nextBtn" class="navBtn nextNav" onclick="goNext()">Next ➡️ / తరువాత</button>
+</div>
+
+<script>
+"use strict";
+
+let score=0,stars=0,done=0,quizCorrect=0;
+const state={learn:false,types:false,reasons:false,stories:false,quiz:false};
+
+const typePool=[
+["A family moves to another city for three months for construction work and then returns home.","ఒక కుటుంబం నిర్మాణ పనికి మూడు నెలలు మరో నగరానికి వెళ్లి తిరిగి ఇంటికి వస్తుంది.","temporary"],
+["Elderly parents leave their village to live with their children permanently.","వృద్ధ తల్లిదండ్రులు పిల్లలతో శాశ్వతంగా ఉండటానికి గ్రామం విడిచి వెళ్తారు.","permanent"],
+["Farm workers move for a season and return when the season changes.","వ్యవసాయ కూలీలు ఒక కాలానికి వెళ్లి కాలం మారినప్పుడు తిరిగి వస్తారు.","temporary"],
+["A family settles in a new city and does not plan to return to the old home.","ఒక కుటుంబం కొత్త నగరంలో స్థిరపడి పాత ఇంటికి తిరిగి రావాలని అనుకోదు.","permanent"],
+["A worker goes to another town for six months and comes back home.","ఒక కార్మికుడు ఆరు నెలలు మరో పట్టణానికి వెళ్లి ఇంటికి తిరిగి వస్తాడు.","temporary"]
+];
+
+const reasonPool=[
+["People move to a safer place because floods often affect their village.","తరచూ వరదలు వచ్చే గ్రామం నుంచి ప్రజలు సురక్షిత ప్రదేశానికి వెళ్తారు.","natural"],
+["A person moves to a city for a higher salary.","ఎక్కువ జీతం కోసం ఒక వ్యక్తి నగరానికి వెళ్తాడు.","other"],
+["Houses and crops are damaged in a cyclone, so a family moves.","తుఫానులో ఇళ్లు, పంటలు దెబ్బతినడంతో కుటుంబం వేరే ప్రాంతానికి వెళ్తుంది.","natural"],
+["A child moves to a city for higher education.","ఉన్నత విద్య కోసం ఒక పిల్లవాడు నగరానికి వెళ్తాడు.","other"],
+["Drought causes crops to fail and people move for a better life.","కరువు వల్ల పంటలు విఫలమై ప్రజలు మెరుగైన జీవితం కోసం వెళ్తారు.","natural"],
+["A family moves because the father starts a new business in another place.","నాన్న వేరే ప్రాంతంలో కొత్త వ్యాపారం ప్రారంభించడంతో కుటుంబం అక్కడికి మారుతుంది.","other"],
+["A family moves to a place with better medical and transport facilities.","మెరుగైన వైద్య, రవాణా సౌకర్యాలు ఉన్న ప్రాంతానికి కుటుంబం మారుతుంది.","other"]
+];
+
+const quizPool=[
+["Migration means:","వలస అంటే:",["Moving from one place to another for better livelihood / మెరుగైన జీవనోపాధి కోసం ఒక ప్రదేశం నుండి మరొక చోటికి వెళ్లడం","Staying at home always / ఎప్పుడూ ఇంట్లోనే ఉండటం","Travelling only for fun / కేవలం వినోదం కోసం ప్రయాణించడం"],0],
+["Which is a natural reason?","సహజ కారణం ఏది?",["Higher salary / ఎక్కువ జీతం","Cyclone / తుఫాను","New business / కొత్త వ్యాపారం"],1],
+["Temporary migration means:","తాత్కాలిక వలస అంటే:",["Moving for a short time and returning home / కొంతకాలం వెళ్లి తిరిగి ఇంటికి రావడం","Never returning / ఎప్పటికీ తిరిగి రాకపోవడం","Moving only after marriage / పెళ్లి తర్వాత మాత్రమే వెళ్లడం"],0],
+["Which is an other reason?","ఇతర కారణం ఏది?",["Drought / కరువు","Flood / వరద","Education / విద్య"],2],
+["Seasonal migration may happen for:","కాలానుగుణ వలస దేనికోసం జరగవచ్చు?",["Farming or fishing / వ్యవసాయం లేదా చేపల వేట","Only sleeping / నిద్ర మాత్రమే","Only celebrations / వేడుకలు మాత్రమే"],0],
+["Permanent migration means:","శాశ్వత వలస అంటే:",["Moving for a short visit / కొద్దిసేపు వెళ్లడం","Living in a new place permanently / కొత్త ప్రదేశంలో శాశ్వతంగా నివసించడం","Going on holiday / సెలవులకు వెళ్లడం"],1],
+["People may migrate because of drought. Drought means:","కరువు అంటే:",["Lack of rain / వర్షాల కొరత","Too much rain / ఎక్కువ వర్షం","A new job / కొత్త ఉద్యోగం"],0],
+["A new job, higher salary or transfer is mainly an:","కొత్త ఉద్యోగం, ఎక్కువ జీతం లేదా బదిలీ ప్రధానంగా:",["Other reason / ఇతర కారణం","Natural reason / సహజ కారణం","Cyclone / తుఫాను"],0],
+["Which is a natural reason?","సహజ కారణం ఏది?",["Education / విద్య","Flood / వరద","Business / వ్యాపారం"],1],
+["Children may move to cities for:","పిల్లలు నగరాలకు దేనికోసం వెళ్లవచ్చు?",["Higher education / ఉన్నత విద్య","Only games / ఆటలు మాత్రమే","Only holidays / సెలవులు మాత్రమే"],0]
+];
+
+let typeItems=[],reasonItems=[],quizItems=[];
+let typeIndex=0,reasonIndex=0,storyIndex=0,quizIndex=0;
+
+function $(id){return document.getElementById(id)}
+function shuffle(a){return [...a].sort(()=>Math.random()-0.5)}
+function hideAll(){document.querySelectorAll(".screen").forEach(x=>x.classList.add("hidden"))}
+
+let currentPart="home";
+const partOrder=["home","learn","types","reasons","stories","quiz","result"];
+const partNames={
+  home:"Home / ప్రారంభం",learn:"Learn / నేర్చుకోండి",types:"Types / రకాలు",
+  reasons:"Reasons / కారణాలు",stories:"Stories / కథలు",quiz:"Quiz / క్విజ్",result:"Result / ఫలితం"
+};
+function partIndex(){return Math.max(0,partOrder.indexOf(currentPart))}
+function canOpenPart(i){
+  if(i<=1) return true;
+  if(i===2) return state.learn;
+  if(i===3) return state.types;
+  if(i===4) return state.reasons;
+  if(i===5) return state.stories;
+  if(i===6) return state.quiz;
+  return false;
+}
+function setCurrent(id){
+  currentPart=id;
+  const nav=$("bottomNav");
+  if(id==="home"){nav.classList.add("hidden");return}
+  nav.classList.remove("hidden");
+  $("navLabel").textContent=partNames[id]||"Mission";
+  const i=partIndex();
+  $("backBtn").disabled=(i<=1);
+  $("backBtn").style.opacity=i<=1?".45":"1";
+  const isResult=id==="result";
+  $("nextBtn").disabled=isResult;
+  $("nextBtn").style.opacity=isResult?".45":"1";
+  $("nextBtn").textContent=isResult?"🏁 Done / పూర్తైంది":(i===5?"🏆 Result ➡️ / ఫలితం":"Next ➡️ / తరువాత");
+}
+function show(id){
+  hideAll();$(id).classList.remove("hidden");setCurrent(id);
+  window.scrollTo({top:0,behavior:"smooth"});
+}
+function goBack(){
+  const i=partIndex();
+  if(i<=1){show("learn");return}
+  const prev=partOrder[i-1];
+  show(prev);
+}
+function goNext(){
+  const i=partIndex();
+  if(i<1)return;
+  if(currentPart==="learn"){if(!state.learn){alert("Complete this mission first. / ఈ దశను ముందుగా పూర్తి చేయండి.");return}show("types");initTypes();return}
+  if(currentPart==="types"){if(!state.types){alert("Complete this mission first. / ఈ దశను ముందుగా పూర్తి చేయండి.");return}show("reasons");initReasons();return}
+  if(currentPart==="reasons"){if(!state.reasons){alert("Complete this mission first. / ఈ దశను ముందుగా పూర్తి చేయండి.");return}show("stories");initStories();return}
+  if(currentPart==="stories"){if(!state.stories){alert("Complete this mission first. / ఈ దశను ముందుగా పూర్తి చేయండి.");return}show("quiz");initQuiz();return}
+  if(currentPart==="quiz"){if(!state.quiz){alert("Complete the quiz first. / క్విజ్‌ను ముందుగా పూర్తి చేయండి.");return}showResult();return}
+}
+function update(){
+  const n=Object.values(state).filter(Boolean).length;
+  $("count").textContent=n+" / 5";
+  $("fill").style.width=(n*20)+"%";
+  ["learn","types","reasons","stories","quiz"].forEach((k,i)=>{
+    $("m"+(i+1)).classList.toggle("done",state[k]);
+  });
+  $("finalScore").textContent=score;
+  $("finalStars").textContent=stars;
+}
+function award(points){
+  score+=points;
+  if(points>=10)stars++;
+  update();
+}
+function tone(ok){
+  try{
+    const C=window.AudioContext||window.webkitAudioContext;
+    if(!C)return;
+    const c=new C(),o=c.createOscillator(),g=c.createGain();
+    o.type="sine";o.frequency.value=ok?720:180;g.gain.value=.05;
+    o.connect(g);g.connect(c.destination);o.start();
+    o.frequency.exponentialRampToValueAtTime(ok?950:120,c.currentTime+.15);
+    g.gain.exponentialRampToValueAtTime(.001,c.currentTime+.18);o.stop(c.currentTime+.2);
+  }catch(e){}
+}
+
+/* Voice: separate English and Telugu utterances so a single voice does not
+   try to pronounce both scripts. Naturalness depends on installed phone voices. */
+function voice(text){
+  if(!("speechSynthesis" in window)){
+    alert("Voice is not supported by this browser. Please open this file in Google Chrome.");
+    return;
+  }
+  speechSynthesis.cancel();
+  const voices=speechSynthesis.getVoices();
+  const parts=text.match(/[^.!?।]+[.!?।]?/g)||[text];
+  parts.forEach(part=>{
+    const t=part.trim();if(!t)return;
+    const tel=/[\u0C00-\u0C7F]/.test(t);
+    const u=new SpeechSynthesisUtterance(t);
+    u.lang=tel?"te-IN":"en-IN";
+    u.rate=tel?.80:.88;u.pitch=1;u.volume=1;
+    if(tel){
+      u.voice=voices.find(v=>/^te[-_]IN$/i.test(v.lang))||voices.find(v=>/telugu/i.test(v.name))||null;
+    }else{
+      u.voice=voices.find(v=>/^en[-_]IN$/i.test(v.lang))||voices.find(v=>/^en[-_]/i.test(v.lang))||null;
+    }
+    speechSynthesis.speak(u);
+  });
+}
+if("speechSynthesis" in window) speechSynthesis.getVoices();
+
+
+let student={name:"",cls:"",section:""};
+function readStudentDetails(){
+  const name=$("studentName").value.trim();
+  const cls=$("studentClass").value;
+  const section=$("studentSection").value.trim();
+  const err=$("studentError");
+  if(!name){
+    err.textContent="Please enter the student's name. / దయచేసి విద్యార్థి పేరు నమోదు చేయండి.";
+    err.className="feedback show bad"; $("studentName").focus(); return false;
+  }
+  if(!cls){
+    err.textContent="Please select the class. / దయచేసి తరగతిని ఎంచుకోండి.";
+    err.className="feedback show bad"; $("studentClass").focus(); return false;
+  }
+  student={name,cls,section};
+  err.className="feedback";
+  return true;
+}
+function startGame(){
+  if(!readStudentDetails()) return;
+  show("learn");
+  voice("Welcome "+student.name+". First, learn the lesson. స్వాగతం "+student.name+". మొదట పాఠాన్ని నేర్చుకుందాం.");
+}
+function completeLearn(){
+  state.learn=true;done++;update();show("types");initTypes();
+  voice("Learning mission complete. Now identify temporary and permanent migration. నేర్చుకునే దశ పూర్తైంది. ఇప్పుడు వలస రకాలను గుర్తించండి.");
+}
+
+function initTypes(){
+  typeItems=shuffle(typePool);typeIndex=0;$("typeNext").classList.add("hidden");renderType();
+}
+function renderType(){
+  if(typeIndex>=typeItems.length){
+    state.types=true;done++;update();$("typeFeedback").className="feedback show good";$("typeFeedback").innerHTML="🎉 <b>Mission 2 Complete!</b><span class='te'>వలస రకాల దశ పూర్తైంది!</span>";$("typeNext").classList.remove("hidden");return;
+  }
+  const d=typeItems[typeIndex];
+  $("typeQuestion").innerHTML="<span class='badge'>Situation "+(typeIndex+1)+" of "+typeItems.length+"</span><div class='question'>"+d[0]+"<span class='te'>"+d[1]+"</span></div>";
+  $("typeOptions").innerHTML='<button class="choice" onclick="answerType(this,\'temporary\')">🕒 Temporary / తాత్కాలిక</button><button class="choice" onclick="answerType(this,\'permanent\')">🏠 Permanent / శాశ్వత</button>';
+  $("typeFeedback").className="feedback";
+}
+function answerType(btn,a){
+  const d=typeItems[typeIndex];
+  if(a===d[2]){
+    btn.classList.add("correct");tone(true);award(10);$("typeFeedback").className="feedback show good";$("typeFeedback").textContent="✅ Correct! / సరైన సమాధానం!";
+    typeIndex++;setTimeout(renderType,500);
+  }else{btn.classList.add("wrong");tone(false);$("typeFeedback").className="feedback show bad";$("typeFeedback").textContent="❌ Try again. / మళ్లీ ప్రయత్నించండి."}
+}
+function openReasons(){show("reasons");initReasons()}
+function initReasons(){
+  reasonItems=shuffle(reasonPool);reasonIndex=0;$("reasonNext").classList.add("hidden");renderReason();
+}
+function renderReason(){
+  if(reasonIndex>=reasonItems.length){
+    state.reasons=true;done++;update();$("reasonFeedback").className="feedback show good";$("reasonFeedback").innerHTML="🎉 <b>Mission 3 Complete!</b><span class='te'>వలస కారణాల దశ పూర్తైంది!</span>";$("reasonNext").classList.remove("hidden");return;
+  }
+  const d=reasonItems[reasonIndex];
+  $("reasonQuestion").innerHTML="<span class='badge'>Case "+(reasonIndex+1)+" of "+reasonItems.length+"</span><div class='question'>"+d[0]+"<span class='te'>"+d[1]+"</span></div>";
+  $("reasonOptions").innerHTML='<button class="choice" onclick="answerReason(this,\'natural\')">🌪️ Natural reason / సహజ కారణం</button><button class="choice" onclick="answerReason(this,\'other\')">💼 Other reason / ఇతర కారణం</button>';
+  $("reasonFeedback").className="feedback";
+}
+function answerReason(btn,a){
+  const d=reasonItems[reasonIndex];
+  if(a===d[2]){
+    btn.classList.add("correct");tone(true);award(10);$("reasonFeedback").className="feedback show good";$("reasonFeedback").textContent="🌟 Correct! / సరైనది!";
+    reasonIndex++;setTimeout(renderReason,500);
+  }else{btn.classList.add("wrong");tone(false);$("reasonFeedback").className="feedback show bad";$("reasonFeedback").textContent="💡 Think: natural calamity or opportunity/need? / ఆలోచించండి: ప్రకృతి విపత్తా లేదా అవకాశం/అవసరమా?"}
+}
+function openStories(){show("stories");initStories()}
+function initStories(){
+  storyIndex=0;$("storyNext").classList.add("hidden");
+  const data=[
+    ["👦","Chintu / చింటూ","We moved to Vijayawada because we lost our home and crop in the cyclone.","తుఫానులో మా ఇల్లు, పంట పోయాయి. అందుకే విజయవాడకు వచ్చాం.","🌪️ Cyclone / తుఫాను"],
+    ["👧","Kumari / కుమారి","My father works as a daily wage labourer. We moved to Chennai because he is paid well there.","మా నాన్న రోజువారీ కూలీ. అక్కడ ఎక్కువ కూలీ వస్తుందని చెన్నైకి వచ్చాం.","💼 Work opportunity / ఉద్యోగ అవకాశం"],
+    ["🧒","Rajesh / రాజేష్","We move in search of livelihood. I want to continue my studies.","జీవనోపాధి కోసం మేము తిరుగుతాం. నేను చదువు కొనసాగించాలనుకుంటున్నాను.","📚 Livelihood & education / జీవనోపాధి & విద్య"],
+    ["👧","Pallavi / పల్లవి","We moved to Guntur because my brother joined a college and my father started a new business.","నా అన్న కాలేజీలో చేరాడు, నాన్న కొత్త వ్యాపారం ప్రారంభించారు. అందుకే గుంటూరుకు మారాం.","🎓 Education + Business / విద్య + వ్యాపారం"]
+  ];
+  $("storiesBox").innerHTML="";
+  data.forEach((s,i)=>{
+    $("storiesBox").innerHTML+=`<div class="story"><div class="avatar">${s[0]}</div><div><b>${s[1]}</b><p>${s[2]}</p><p class="te">${s[3]}</p><button class="speak" id="story${i}" onclick="storyDone(${i},this)">${s[4]}</button></div></div>`;
+  });
+  $("storyFeedback").className="feedback";
+}
+function storyDone(i,btn){
+  if(btn.disabled)return;
+  btn.disabled=true;btn.classList.add("correct");storyIndex++;award(8);tone(true);
+  $("storyFeedback").className="feedback show good";$("storyFeedback").textContent="🌟 Good! / చాలా బాగా గుర్తించారు! Story "+storyIndex+" of 4.";
+  if(storyIndex===4){
+    state.stories=true;done++;update();$("storyFeedback").innerHTML="🎉 <b>Mission 4 Complete!</b><span class='te'>కథల దశ పూర్తైంది!</span>";$("storyNext").classList.remove("hidden");
+  }
+}
+function openQuiz(){show("quiz");initQuiz()}
+function initQuiz(){
+  quizItems=shuffle(quizPool).slice(0,5);quizIndex=0;quizCorrect=0;$("quizNext").classList.add("hidden");renderQuiz();
+}
+function renderQuiz(){
+  if(quizIndex>=quizItems.length){
+    state.quiz=true;done++;update();$("quizBox").innerHTML="<div class='feedback show good'>🎉 <b>Final Quiz Complete!</b><span class='te'>తుది క్విజ్ పూర్తైంది!</span><br>You got "+quizCorrect+" / 5 correct.</div>";$("quizNext").classList.remove("hidden");return;
+  }
+  const q=quizItems[quizIndex];
+  $("quizBox").innerHTML="<span class='badge'>Question "+(quizIndex+1)+" of 5</span><div class='question'>"+q[0]+"<span class='te'>"+q[1]+"</span></div>";
+  q[2].forEach((x,i)=>{const b=document.createElement("button");b.className="choice";b.innerHTML=x;b.onclick=()=>answerQuiz(b,i);$("quizBox").appendChild(b)});
+}
+function answerQuiz(btn,i){
+  const q=quizItems[quizIndex];
+  if(i===q[3]){
+    btn.classList.add("correct");tone(true);quizCorrect++;award(15);$("quizFeedback").className="feedback show good";$("quizFeedback").textContent="🎉 Correct! / సరైన సమాధానం!";
+    document.querySelectorAll("#quizBox .choice").forEach(b=>b.disabled=true);quizIndex++;setTimeout(renderQuiz,600);
+  }else{btn.classList.add("wrong");tone(false);$("quizFeedback").className="feedback show bad";$("quizFeedback").textContent="❌ Try another answer. / మరో సమాధానం ప్రయత్నించండి."}
+}
+function showResult(){
+  $("resultStudentName").textContent=student.name||"Student";
+  $("resultStudentClass").textContent=student.cls||"Class 5";
+  $("resultStudentSection").textContent=student.section ? " • Section "+student.section : "";
+
+  $("finalScore").textContent=score;
+  $("finalStars").textContent=stars;
+  $("finalCorrect").textContent=quizCorrect+"/5";
+  let title,text,icon;
+  if(quizCorrect===5){icon="🏆";title="TOP LEVEL CHAMPION!";text="Perfect Quiz — Outstanding! / అన్ని సమాధానాలు సరైనవి — అద్భుతం!"}
+  else if(quizCorrect>=4){icon="🥇";title="GOLD LEVEL";text="Excellent work! / చాలా అద్భుతంగా చేశారు!"}
+  else if(quizCorrect>=3){icon="🥈";title="SILVER LEVEL";text="Very good! / చాలా బాగా చేశారు!"}
+  else {icon="🥉";title="BRONZE LEVEL";text="Good effort — try again! / మంచి ప్రయత్నం — మళ్లీ ప్రయత్నించండి!"}
+  $("trophyIcon").textContent=icon;
+  $("levelTitle").textContent=title;
+  $("levelText").textContent=text;
+  show("result");
+  $("fill").style.width="100%";
+  voice("Congratulations! Migration Mission is complete. "+text);
+}
+function restart(){location.reload()}
+update();
+</script>
+</body>
+</html>
